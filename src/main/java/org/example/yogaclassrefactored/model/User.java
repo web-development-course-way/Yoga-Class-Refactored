@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @MappedSuperclass
+@Entity
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
