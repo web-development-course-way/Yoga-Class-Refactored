@@ -1,13 +1,13 @@
 package org.example.yogaclassrefactored.model;
 
 import jakarta.persistence.*;
+import org.example.yogaclassrefactored.enums.Role;
 
 import java.util.UUID;
 
-@MappedSuperclass
 @Entity
 @Table(name = "user")
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
@@ -29,6 +29,9 @@ public abstract class User {
 
     @Column(name = "birth_date")
     private String birthDate;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public UUID getId() {
         return id;
