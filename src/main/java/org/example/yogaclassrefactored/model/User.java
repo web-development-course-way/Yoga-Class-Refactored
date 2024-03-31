@@ -6,6 +6,7 @@ import java.util.UUID;
 
 @MappedSuperclass
 @Entity
+@Table(name = "user")
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
