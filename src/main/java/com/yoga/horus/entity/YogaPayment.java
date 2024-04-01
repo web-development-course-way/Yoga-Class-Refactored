@@ -1,7 +1,6 @@
 package com.yoga.horus.entity;
 
 import com.yoga.horus.enums.PaymentMethod;
-import com.yoga.horus.enums.PaymentStatus;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -15,9 +14,17 @@ public class YogaPayment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "subscription_id",nullable = false)
-    @OneToMany
-    private UUID subscriptionId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",
+                referencedColumnName = "id")
+    private YogaUser userId;
+
+
+    @ManyToOne
+    @JoinColumn(name = "package_id",
+                referencedColumnName = "id")
+    private YogaPackage packageId;
 
     @Column(nullable = false)
     private int amount;
@@ -29,24 +36,12 @@ public class YogaPayment {
     @Enumerated
     private PaymentMethod paymentMethod;
 
-    @Column(name = "payment_status",nullable = false)
-    @Enumerated
-    private PaymentStatus paymentStatus;
-
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public UUID getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    public void setSubscriptionId(UUID subscriptionId) {
-        this.subscriptionId = subscriptionId;
     }
 
     public int getAmount() {
@@ -73,11 +68,5 @@ public class YogaPayment {
         this.paymentMethod = paymentMethod;
     }
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
 
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
 }

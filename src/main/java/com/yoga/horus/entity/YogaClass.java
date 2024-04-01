@@ -25,10 +25,6 @@ public class YogaClass {
     @Column(nullable = false)
     private int capacity;
 
-    @ManyToMany
-    private List<YogaPackage> yogaPackages;
-
-
     public UUID getId() {
         return id;
     }

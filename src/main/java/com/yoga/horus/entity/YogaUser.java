@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class YogaUser {
 
     @Id
@@ -31,9 +31,6 @@ public class YogaUser {
 
     @Column(name="date_of_birth",nullable = false)
     private Date dateOfBirth;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
     public UUID getId() {
         return id;
@@ -89,13 +86,5 @@ public class YogaUser {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

@@ -20,8 +20,8 @@ public class YogaPackage {
     @Column(nullable = false)
     private int price;
 
-    @ManyToMany
-    private List<YogaClass> yogaClasses;
+    @Column(nullable = false)
+    private int numberOfClasses;
 
     public UUID getId() {
         return id;
