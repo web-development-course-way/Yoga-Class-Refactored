@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
-public class YogaPayment {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,13 +18,13 @@ public class YogaPayment {
     @ManyToOne
     @JoinColumn(name = "user_id",
                 referencedColumnName = "id")
-    private YogaUser userId;
+    private Users userId;
 
 
     @ManyToOne
     @JoinColumn(name = "package_id",
                 referencedColumnName = "id")
-    private YogaPackage packageId;
+    private Bundle packageId;
 
     @Column(nullable = false)
     private int amount;

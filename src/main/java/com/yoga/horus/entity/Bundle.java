@@ -3,12 +3,11 @@ package com.yoga.horus.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "package")
-public class YogaPackage {
+public class Bundle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

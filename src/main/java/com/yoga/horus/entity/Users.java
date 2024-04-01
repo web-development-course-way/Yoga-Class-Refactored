@@ -4,12 +4,11 @@ import com.yoga.horus.enums.Role;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name="users")
-public class YogaUser {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,6 +30,10 @@ public class YogaUser {
 
     @Column(name="date_of_birth",nullable = false)
     private Date dateOfBirth;
+
+    @Column(nullable = false)
+    @Enumerated
+    private Role role;
 
     public UUID getId() {
         return id;
