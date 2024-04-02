@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/yoga-class-app
+    username: mustafa
+    password: 123456789
+  main:
+    banner-mode: off
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
