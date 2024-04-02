@@ -1,6 +1,7 @@
 package com.yoga.horus.controller;
 
 import com.yoga.horus.dto.UserDTO;
+import com.yoga.horus.dtoMapper.UserMapper;
 import com.yoga.horus.entity.User;
 import com.yoga.horus.service.UserService;
 import com.yoga.horus.util.APIResponse;
@@ -21,7 +22,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public APIResponse<UserDTO> getById(@PathVariable UUID id) {
-        return null;
+        UserDTO user= userService.getOne(id);
+        return APIResponse.ok(user);
     }
 
 

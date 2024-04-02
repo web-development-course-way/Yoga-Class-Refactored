@@ -1,7 +1,7 @@
 package com.yoga.horus.service;
 
 import com.yoga.horus.dto.UserDTO;
-import com.yoga.horus.dtoMapper.UserDTOMapper;
+import com.yoga.horus.dtoMapper.UserMapper;
 import com.yoga.horus.entity.User;
 import com.yoga.horus.repository.UsersRepository;
 import org.springframework.stereotype.Service;
@@ -15,25 +15,25 @@ import java.util.stream.Collectors;
 public class UserService implements BaseService <User,UserDTO>{
 
     private final UsersRepository usersRepository;
-    private final UserDTOMapper userDTOMapper;
+    private final UserMapper userMapper;
 
-    public UserService(UsersRepository usersRepository, UserDTOMapper userDTOMapper) {
+    public UserService(UsersRepository usersRepository, UserMapper userMapper) {
         this.usersRepository = usersRepository;
-        this.userDTOMapper = userDTOMapper;
+        this.userMapper = userMapper;
     }
 
     @Override
     public List<UserDTO> getAll() {
         return usersRepository.findAll()
                 .stream()
-                .map(userDTOMapper)
+                .map(userMapper::userToUserDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserDTO getOne(UUID id) {
         return usersRepository.findById(id)
-                .map(userDTOMapper)
+                .map(userMapper::userToUserDTO)
                 .get();
     }
 
