@@ -7,7 +7,7 @@ import jakarta.persistence.Embedded;
 import java.util.UUID;
 
 @Embeddable
-public class AttendanceId {
+public class AttendanceId extends BaseEntity {
 
     @Column(name = "user_id")
     private UUID userId;

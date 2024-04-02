@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table (name = "class_attendance")
-public class Attendance {
+public class Attendance extends BaseEntity {
 
     @EmbeddedId
     private AttendanceId id;
@@ -14,7 +14,7 @@ public class Attendance {
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
-    private Users users;
+    private User users;
 
     @ManyToOne
     @MapsId("yogaClassId")
@@ -32,11 +32,11 @@ public class Attendance {
         this.id = id;
     }
 
-    public Users getYogaUser() {
+    public User getYogaUser() {
         return users;
     }
 
-    public void setYogaUser(Users yogaUser) {
+    public void setYogaUser(User yogaUser) {
         this.users = yogaUser;
     }
 

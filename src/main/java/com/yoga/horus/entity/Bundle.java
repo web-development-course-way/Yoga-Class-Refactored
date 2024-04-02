@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "package")
-public class Bundle {
+public class Bundle extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

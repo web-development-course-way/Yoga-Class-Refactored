@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name="users")
-public class Users {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -20,7 +20,7 @@ public class Users {
     @Column(name="last_name",length = 50, nullable = false)
     private String lastName;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true,nullable = false,length = 11)
     private String phone;
 
     @Column(unique = true,nullable = false)
@@ -89,5 +89,13 @@ public class Users {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

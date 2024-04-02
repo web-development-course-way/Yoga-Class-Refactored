@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
-public class Payment {
+public class Payment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,7 +18,7 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "user_id",
                 referencedColumnName = "id")
-    private Users userId;
+    private User userId;
 
 
     @ManyToOne
