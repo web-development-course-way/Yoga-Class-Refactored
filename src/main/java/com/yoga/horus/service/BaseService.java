@@ -3,14 +3,14 @@ package com.yoga.horus.service;
 import java.util.List;
 import java.util.UUID;
 
-public interface BaseService<T> {
+public interface BaseService<Entity,DTO> {
 
-    List<T> getAll();
-    T getOne (UUID id);
+    List<DTO> getAll();
+    DTO getOne (UUID id);
 
-    void create (T object);
+    void create (Entity object);
 
-    T update (UUID id, T object);
+    void update (UUID id, Entity object);
 
     void  delete (UUID id);
 }

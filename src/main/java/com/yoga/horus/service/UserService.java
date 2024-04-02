@@ -4,12 +4,15 @@ import com.yoga.horus.dto.UserDTO;
 import com.yoga.horus.dtoMapper.UserDTOMapper;
 import com.yoga.horus.entity.User;
 import com.yoga.horus.repository.UsersRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class UserService implements BaseService <UserDTO>{
+@Service
+public class UserService implements BaseService <User,UserDTO>{
 
     private final UsersRepository usersRepository;
     private final UserDTOMapper userDTOMapper;
@@ -31,22 +34,31 @@ public class UserService implements BaseService <UserDTO>{
     public UserDTO getOne(UUID id) {
         return usersRepository.findById(id)
                 .map(userDTOMapper)
-                .orElseThrow();
+                .get();
     }
 
-    @Override
-    public void create(UserDTO object) {
-        User user = new User();
+
+    public void create(User user) {
         usersRepository.save(user);
     }
 
     @Override
-    public UserDTO update(UUID id, UserDTO object) {
-        return null;
+    public void update(UUID id, User user) {
+       if (usersRepository.existsById(id)){
+           usersRepository.save(user);
+       } else {
+           throw new NoSuchElementException();
+       }
+
     }
 
     @Override
     public void delete(UUID id) {
+        if (usersRepository.existsById(id)){
+            usersRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException();
+        }
 
     }
 

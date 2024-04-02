@@ -2,12 +2,11 @@ package com.yoga.horus.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
 
 import java.util.UUID;
 
 @Embeddable
-public class AttendanceId extends BaseEntity {
+public class AttendanceId {
 
     @Column(name = "user_id")
     private UUID userId;
