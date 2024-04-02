@@ -2,11 +2,12 @@ package com.yoga.horus.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
 @Entity
-@Table(name = "package")
+@Table(name = "bundle")
 public class Bundle extends BaseEntity {
 
     @Id
@@ -14,6 +15,7 @@ public class Bundle extends BaseEntity {
     private UUID id;
 
     @Column(nullable = false,length = 50,unique = true)
+    @Size(min = 3)
     private String name;
 
     @Column(nullable = false)

@@ -2,12 +2,13 @@ package com.yoga.horus.entity;
 
 import com.yoga.horus.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name="users")
+@Table(name="yoga_user")
 public class User extends BaseEntity {
 
     @Id
@@ -15,15 +16,19 @@ public class User extends BaseEntity {
     private UUID id;
 
     @Column(name="first_name",length = 50, nullable = false)
+    @Size(min = 3)
     private String firstName;
 
     @Column(name="last_name",length = 50, nullable = false)
+    @Size(min = 3)
     private String lastName;
 
     @Column(unique = true,nullable = false,length = 11)
+    @Pattern(regexp = "\\+?[0-9]+", message = "Invalid phone number")
     private String phone;
 
     @Column(unique = true,nullable = false)
+    @Email
     private String email;
 
     private String nationality;
@@ -32,7 +37,7 @@ public class User extends BaseEntity {
     private Date dateOfBirth;
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated (EnumType.STRING)
     private Role role;
 
     public UUID getId() {

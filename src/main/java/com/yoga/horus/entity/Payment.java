@@ -33,7 +33,7 @@ public class Payment extends BaseEntity {
     private Date paymentDate;
 
     @Column(name = "payment_method",nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     public UUID getId() {

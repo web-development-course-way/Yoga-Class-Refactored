@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.UUID;
 
-public interface BaseGetController<T> {
+public interface BaseController<T> {
     APIResponse<T> getById(UUID id);
 
     APIResponse<T> getAll();

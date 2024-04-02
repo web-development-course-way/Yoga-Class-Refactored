@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserService userService;
@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public APIResponse<UserDTO> getById(@PathVariable UUID id) {
-        UserDTO user= userService.getOne(id);
+    public APIResponse<UserDTO> getById(@PathVariable String id) {
+        UserDTO user= userService.getOne(UUID.fromString(id));
         return APIResponse.ok(user);
     }
 

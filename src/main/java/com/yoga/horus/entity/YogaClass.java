@@ -1,6 +1,7 @@
 package com.yoga.horus.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ public class YogaClass extends BaseEntity {
     private UUID id;
 
     @Column(nullable = false, length = 50)
+    @Size(min = 3)
     private String title;
 
     @Column(length = 100)
