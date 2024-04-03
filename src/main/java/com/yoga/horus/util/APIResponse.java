@@ -16,6 +16,7 @@ public class APIResponse<T> {
         this.timestamp = System.currentTimeMillis();
     }
 
+
     public static <T> APIResponse<T> ok(T data) {
         return new APIResponse<>(HttpStatus.OK.value(), "Success", data);
     }

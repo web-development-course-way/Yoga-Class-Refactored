@@ -2,17 +2,19 @@ package com.yoga.horus.controller;
 
 import com.yoga.horus.util.APIResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.mapstruct.control.MappingControl;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface BaseController<T> {
     APIResponse<T> getById(UUID id);
 
-    APIResponse<T> getAll();
+    APIResponse<List<T>> getAll();
 
-    APIResponse<T> create(HttpServletRequest request);
+    APIResponse<T> create(T object);
 
-    APIResponse<T> update(UUID id, HttpServletRequest request);
+    APIResponse<T> update(UUID id, T object);
 
-    APIResponse<T> delete(UUID id);
+    APIResponse<String> delete(UUID id);
 }

@@ -1,13 +1,14 @@
 package com.yoga.horus.controller;
 
+import com.yoga.horus.constant.Constant;
 import com.yoga.horus.dto.UserDTO;
-import com.yoga.horus.dtoMapper.UserMapper;
 import com.yoga.horus.entity.User;
 import com.yoga.horus.service.UserService;
 import com.yoga.horus.util.APIResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,29 +22,35 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public APIResponse<UserDTO> getById(@PathVariable String id) {
-        UserDTO user= userService.getOne(UUID.fromString(id));
+    public APIResponse<UserDTO> getById(@PathVariable UUID id) {
+        UserDTO user= userService.getOne(id);
         return APIResponse.ok(user);
     }
 
-
-    public APIResponse<UserDTO> getAll() {
-        return null;
+    @GetMapping("/")
+    public APIResponse<List<UserDTO>> getAll() {
+        List<UserDTO> users = userService.getAll();
+        return APIResponse.ok(users);
     }
 
 
     @PostMapping("/")
-    public APIResponse<UserDTO> create(@RequestBody HttpServletRequest request) {
-        return null;
+    public APIResponse<UserDTO> create(@RequestBody User user) {
+        UserDTO newUser = userService.create(user);
+        return APIResponse.ok(newUser);
     }
 
 
-    public APIResponse<UserDTO> update(UUID id, HttpServletRequest request) {
-        return null;
+    @PutMapping("/{id}")
+    public APIResponse<UserDTO> update(@PathVariable UUID id, @RequestBody User user) {
+        UserDTO updatedUser = userService.update(id, user);
+        return APIResponse.ok(updatedUser);
     }
 
 
-    public APIResponse<UserDTO> delete(UUID id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public APIResponse<String> delete(@PathVariable UUID id) {
+        userService.delete(id);
+        return APIResponse.ok(Constant.Deleted());
     }
 }

@@ -38,18 +38,21 @@ public class UserService implements BaseService <User,UserDTO>{
     }
 
 
-    public void create(User user) {
-        usersRepository.save(user);
+
+    @Override
+    public UserDTO create(User user) {
+        User newUser = usersRepository.save(user);
+        return userMapper.userToUserDTO(newUser);
     }
 
     @Override
-    public void update(UUID id, User user) {
+    public UserDTO update(UUID id, User user) {
        if (usersRepository.existsById(id)){
-           usersRepository.save(user);
+           User savedUser = usersRepository.save(user);
+           return userMapper.userToUserDTO(savedUser);
        } else {
            throw new NoSuchElementException();
        }
-
     }
 
     @Override
