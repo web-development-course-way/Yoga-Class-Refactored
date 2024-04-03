@@ -1,5 +1,6 @@
 package com.yoga.horus.entity;
 
+import com.yoga.horus.config.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -7,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "class")
-public class YogaClass extends BaseEntity {
+public class YogaClass extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
