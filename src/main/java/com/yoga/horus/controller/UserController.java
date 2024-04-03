@@ -5,7 +5,6 @@ import com.yoga.horus.dto.UserDTO;
 import com.yoga.horus.entity.User;
 import com.yoga.horus.service.UserService;
 import com.yoga.horus.util.APIResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,7 +49,8 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public APIResponse<String> delete(@PathVariable UUID id) {
+        String deletedObject = Constant.Deleted(userService.getOne(id).getClass());
         userService.delete(id);
-        return APIResponse.ok(Constant.Deleted());
+        return APIResponse.ok(Constant.Deleted(deletedObject));
     }
 }
