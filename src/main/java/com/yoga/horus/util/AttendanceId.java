@@ -1,4 +1,4 @@
-package com.yoga.horus.entity;
+package com.yoga.horus.util;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

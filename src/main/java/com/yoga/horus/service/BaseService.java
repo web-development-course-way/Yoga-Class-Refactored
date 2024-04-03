@@ -8,9 +8,9 @@ public interface BaseService<Entity,DTO> {
     List<DTO> getAll();
     DTO getOne (UUID id);
 
-    void create (Entity object);
+    DTO create (Entity object);
 
-    void update (UUID id, Entity object);
+    DTO update (UUID id, Entity object);
 
     void  delete (UUID id);
 }

@@ -1,6 +1,8 @@
 package com.yoga.horus.entity;
 
+
 import com.yoga.horus.config.Auditable;
+import com.yoga.horus.util.AttendanceId;
 import jakarta.persistence.*;
 
 import java.util.Date;

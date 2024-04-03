@@ -1,5 +1,6 @@
 package com.yoga.horus.util;
 
+import com.yoga.horus.constant.Constant;
 import org.springframework.http.HttpStatus;
 
 public class APIResponse<T> {
@@ -16,8 +17,9 @@ public class APIResponse<T> {
         this.timestamp = System.currentTimeMillis();
     }
 
+
     public static <T> APIResponse<T> ok(T data) {
-        return new APIResponse<>(HttpStatus.OK.value(), "Success", data);
+        return new APIResponse<>(HttpStatus.OK.value(), Constant.SUCCESS, data);
     }
 
     public static <T> APIResponse<T> error(int status, String message) {
