@@ -1,18 +1,17 @@
 package com.yoga.horus.controller;
 
 import com.yoga.horus.util.APIResponse;
-import jakarta.servlet.http.HttpServletRequest;
-
+import java.util.List;
 import java.util.UUID;
 
-public interface BaseController<T> {
-    APIResponse<T> getById(UUID id);
+public interface BaseController<Entity, DTO> {
+    APIResponse<DTO> getById(UUID id);
 
-    APIResponse<T> getAll();
+    APIResponse<List<DTO>> getAll();
 
-    APIResponse<T> create(HttpServletRequest request);
+    APIResponse<DTO> create(Entity object);
 
-    APIResponse<T> update(UUID id, HttpServletRequest request);
+    APIResponse<DTO> update(UUID id, Entity object);
 
-    APIResponse<T> delete(UUID id);
+    APIResponse<String> delete(UUID id);
 }
