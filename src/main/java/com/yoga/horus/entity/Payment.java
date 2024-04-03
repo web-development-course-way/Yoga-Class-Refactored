@@ -1,5 +1,6 @@
 package com.yoga.horus.entity;
 
+import com.yoga.horus.config.Auditable;
 import com.yoga.horus.enums.PaymentMethod;
 import jakarta.persistence.*;
 
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
-public class Payment extends BaseEntity {
+public class Payment extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

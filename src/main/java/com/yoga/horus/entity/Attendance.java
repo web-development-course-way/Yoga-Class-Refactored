@@ -1,12 +1,13 @@
 package com.yoga.horus.entity;
 
+import com.yoga.horus.config.Auditable;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table (name = "class_attendance")
-public class Attendance extends BaseEntity {
+public class Attendance extends Auditable {
 
     @EmbeddedId
     private AttendanceId id;
