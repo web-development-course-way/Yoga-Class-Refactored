@@ -4,14 +4,14 @@ import com.yoga.horus.util.APIResponse;
 import java.util.List;
 import java.util.UUID;
 
-public interface BaseController<T> {
-    APIResponse<T> getById(UUID id);
+public interface BaseController<Entity, DTO> {
+    APIResponse<DTO> getById(UUID id);
 
-    APIResponse<List<T>> getAll();
+    APIResponse<List<DTO>> getAll();
 
-    APIResponse<T> create(T object);
+    APIResponse<DTO> create(Entity object);
 
-    APIResponse<T> update(UUID id, T object);
+    APIResponse<DTO> update(UUID id, Entity object);
 
     APIResponse<String> delete(UUID id);
 }
