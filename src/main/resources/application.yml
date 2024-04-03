@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/yoga-class-app
-    username: mustafa
-    password: 123456789
+    username: user
+    password: password
   main:
     banner-mode: off
   jpa:

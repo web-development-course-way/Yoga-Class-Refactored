@@ -8,8 +8,8 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.yoga</groupId>
-	<artifactId>horus</artifactId>
+	<groupId>com.horus</groupId>
+	<artifactId>yoga</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>horus</name>
 	<description>Demo project for Spring Boot</description>
