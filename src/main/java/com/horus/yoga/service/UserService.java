@@ -4,6 +4,7 @@ import com.horus.yoga.dto.UserDTO;
 import com.horus.yoga.dtoMapper.UserMapper;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.repository.UserRepository;
+import com.horus.yoga.util.UserUpdate;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -51,24 +52,8 @@ public class UserService implements BaseService <User, UserDTO>{
     public UserDTO update(UUID id, User user) {
        if (userRepository.existsById(id)){
            User existingUser = userRepository.findById(id).get();
-
-           existingUser.setRole(user.getRole()
-                   != null ? user.getRole() : existingUser.getRole());
-           existingUser.setFirstName(user.getFirstName()
-                   != null ? user.getFirstName() : existingUser.getFirstName());
-           existingUser.setEmail(user.getEmail()
-                   != null ? user.getEmail() : existingUser.getEmail());
-           existingUser.setNationality(user.getNationality()
-                   != null ? user.getNationality() : existingUser.getNationality());
-           existingUser.setPhone(user.getPhone()
-                   != null ? user.getPhone() : existingUser.getPhone());
-           existingUser.setLastName(user.getLastName()
-                   != null ? user.getLastName() : existingUser.getLastName());
-           existingUser.setDateOfBirth(user.getDateOfBirth()
-                   != null ? user.getDateOfBirth() : existingUser.getDateOfBirth());
-
-
-           User savedUser = userRepository.save(existingUser);
+           User updatedUser = UserUpdate.update(user,existingUser);
+           User savedUser = userRepository.save(updatedUser);
            return userMapper.userToUserDTO(savedUser);
        } else {
            throw new NoSuchElementException();
