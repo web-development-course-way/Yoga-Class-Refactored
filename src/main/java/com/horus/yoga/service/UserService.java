@@ -6,6 +6,7 @@ import com.horus.yoga.entity.User;
 import com.horus.yoga.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -16,6 +17,7 @@ public class UserService implements BaseService <User, UserDTO>{
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private User user;
 
     public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
@@ -48,6 +50,23 @@ public class UserService implements BaseService <User, UserDTO>{
     @Override
     public UserDTO update(UUID id, User user) {
        if (userRepository.existsById(id)){
+           User existingUser = userRepository.findById(id).get();
+
+           existingUser.setRole(user.getRole()
+                   != null ? user.getRole() : existingUser.getRole());
+           existingUser.setFirstName(user.getFirstName()
+                   != null ? user.getFirstName() : existingUser.getFirstName());
+           existingUser.setEmail(user.getEmail()
+                   != null ? user.getEmail() : existingUser.getEmail());
+           existingUser.setNationality(user.getNationality()
+                   != null ? user.getNationality() : existingUser.getNationality());
+           existingUser.setPhone(user.getPhone()
+                   != null ? user.getPhone() : existingUser.getPhone());
+           existingUser.setLastName(user.getLastName()
+                   != null ? user.getLastName() : existingUser.getLastName());
+           existingUser.setDateOfBirth(user.getDateOfBirth()
+                   != null ? user.getDateOfBirth() : existingUser.getDateOfBirth());
+
            User savedUser = userRepository.save(user);
            return userMapper.userToUserDTO(savedUser);
        } else {
