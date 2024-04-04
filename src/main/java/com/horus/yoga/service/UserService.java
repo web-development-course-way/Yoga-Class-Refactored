@@ -67,7 +67,8 @@ public class UserService implements BaseService <User, UserDTO>{
            existingUser.setDateOfBirth(user.getDateOfBirth()
                    != null ? user.getDateOfBirth() : existingUser.getDateOfBirth());
 
-           User savedUser = userRepository.save(user);
+
+           User savedUser = userRepository.save(existingUser);
            return userMapper.userToUserDTO(savedUser);
        } else {
            throw new NoSuchElementException();
