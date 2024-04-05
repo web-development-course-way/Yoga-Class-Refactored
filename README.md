@@ -8,7 +8,7 @@
 - Java & Spring boot
 # Installation
 01. Clone Repository and open project in IDE
-02. [Set up database](https://github.com/web-development-course-way/Yoga-Class-Refactored/edit/enhancement/docs/README.md#setting-up-database)
+02. [Set up database](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#setting-up-database)
 03. Run application
 ## Setting up database
 01. Run Docker
@@ -21,11 +21,11 @@
     - Set username = `mustafa` & password = `123456789` in connection tab
 06. Create database with name `yoga-class-app`
 # API Documentation
-1. Open [Swagger](http://localhost:8080/swagger-ui/index.html#/user-controller/update) to test CRUD operations
-2. [Create operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/edit/enhancement/docs/README.md#creating)
-3. [Read operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/edit/enhancement/docs/README.md#reading)
-4. [Update operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/edit/enhancement/docs/README.md#updating)
-5. [Delete operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/edit/enhancement/docs/README.md#deleting)
+1. Open [Swagger](http://localhost:8080/swagger-ui/index.html#) to test CRUD operations
+2. [Create operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#creating)
+3. [Read operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#reading)
+4. [Update operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#updating)
+5. [Delete operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#deleting)
 ## Creating
 - **Enter body in POST request then execute**
 
