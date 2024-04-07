@@ -3,7 +3,7 @@ package com.horus.yoga.controller;
 import com.horus.yoga.constant.Constant;
 import com.horus.yoga.dto.UserDTO;
 import com.horus.yoga.entity.User;
-import com.horus.yoga.service.UserService;
+import com.horus.yoga.service.impl.UserService;
 import com.horus.yoga.util.APIResponse;
 import org.springframework.web.bind.annotation.*;
 

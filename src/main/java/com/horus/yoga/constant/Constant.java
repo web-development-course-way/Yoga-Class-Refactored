@@ -7,4 +7,6 @@ public class Constant {
     }
 
     public static final String SUCCESS = "Success";
+
+    public static final String EmailNotFound = "User Not Found with Email: ";
 }

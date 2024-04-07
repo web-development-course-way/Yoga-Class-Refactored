@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -32,14 +34,21 @@ public class User extends Auditable {
     @Email
     private String email;
 
+    @Column(nullable = false)
+    @Size(max = 100)
+    private String password;
+
     private String nationality;
 
     @Column(name="date_of_birth",nullable = false)
     private Date dateOfBirth;
 
-    @Column(nullable = false)
-    @Enumerated (EnumType.STRING)
-    private Role role;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -49,7 +58,14 @@ public class User extends Auditable {
         this.id = id;
         return this;
     }
+    public String getPassword() {
+        return password;
+    }
 
+    public User setPassword(String password) {
+        this.password = password;
+        return this;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -104,12 +120,12 @@ public class User extends Auditable {
         return this;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public User setRole(Role role) {
-        this.role = role;
+    public User setRoles(Set<Role> roles) {
+        this.roles = roles;
         return this;
     }
 }
