@@ -13,6 +13,7 @@ public class UserUpdate {
                 .setNationality(user.getNationality() != null ? user.getNationality() : existingUser.getNationality())
                 .setPhone(user.getPhone() != null ? user.getPhone() : existingUser.getPhone())
                 .setLastName(user.getLastName() != null ? user.getLastName() : existingUser.getLastName())
-                .setDateOfBirth(user.getDateOfBirth() != null ? user.getDateOfBirth() : existingUser.getDateOfBirth());
+                .setDateOfBirth(user.getDateOfBirth() != null ? user.getDateOfBirth() : existingUser.getDateOfBirth())
+                .setPassword(user.getPassword() !=null ? user.getPassword(): existingUser.getPassword());
     }
 }

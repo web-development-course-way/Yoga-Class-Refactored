@@ -9,36 +9,39 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name="yoga_user")
+@Table(name = "yoga_user")
 public class User extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name="first_name",length = 50, nullable = false)
+    @Column(name = "first_name", length = 50, nullable = false)
     @Size(min = 3)
     private String firstName;
 
-    @Column(name="last_name",length = 50, nullable = false)
+    @Column(name = "last_name", length = 50, nullable = false)
     @Size(min = 3)
     private String lastName;
 
-    @Column(unique = true,nullable = false,length = 11)
+    @Column(unique = true, nullable = false, length = 11)
     @Pattern(regexp = "\\+?[0-9]+", message = "Invalid phone number")
     private String phone;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     @Email
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     private String nationality;
 
-    @Column(name="date_of_birth",nullable = false)
+    @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
     @Column(nullable = false)
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public UUID getId() {
@@ -83,6 +86,15 @@ public class User extends Auditable {
 
     public User setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public User setPassword(String password) {
+        this.password = password;
         return this;
     }
 
