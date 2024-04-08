@@ -6,6 +6,14 @@
 - Docker
 - PostgreSQL & pgAdmin 
 - Java & Spring boot
+- Dependencies used:
+  - Spring Boot DevTools
+  - Spring Web
+  - JDBC API
+  - Spring Data JPA
+  - PostgreSQL Driver
+  - Validation
+  - Spring Boot Actuator 
 # Installation
 01. Clone Repository and open project in IDE
 02. Set up database
