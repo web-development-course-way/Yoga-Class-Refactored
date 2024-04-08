@@ -1,10 +1,13 @@
 package com.horus.yoga.service;
 
 import com.horus.yoga.dto.UserDTO;
+import com.horus.yoga.dto.UserLoginDTO;
 import com.horus.yoga.dtoMapper.UserMapper;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.repository.UserRepository;
 import com.horus.yoga.util.UserUpdate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -18,11 +21,13 @@ public class UserService implements BaseService <User, UserDTO>{
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final AuthenticationManager authenticationManager;
     private User user;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserMapper userMapper,AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -40,7 +45,14 @@ public class UserService implements BaseService <User, UserDTO>{
                 .get();
     }
 
-
+    public String authenticateUser(UserLoginDTO userLoginDTO){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userLoginDTO.email()
+                        ,userLoginDTO.password())
+        );
+        String dummyToken = "randomtoken" + userLoginDTO.email();
+        return dummyToken;
+    }
 
     @Override
     public UserDTO create(User user) {

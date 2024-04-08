@@ -2,6 +2,7 @@ package com.horus.yoga.controller;
 
 import com.horus.yoga.constant.Constant;
 import com.horus.yoga.dto.UserDTO;
+import com.horus.yoga.dto.UserLoginDTO;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.service.UserService;
 import com.horus.yoga.util.APIResponse;
@@ -39,6 +40,11 @@ public class UserController implements BaseController<User, UserDTO> {
         return APIResponse.ok(newUser);
     }
 
+    @PostMapping("/login")
+    public APIResponse<String> login(@RequestBody UserLoginDTO userLoginDTO){
+        String token = userService.authenticateUser(userLoginDTO);
+        return APIResponse.ok(token);
+    }
 
     @PutMapping("/{id}")
     public APIResponse<UserDTO> update(@PathVariable UUID id, @RequestBody User user) {
