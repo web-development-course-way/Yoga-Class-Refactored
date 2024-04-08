@@ -8,18 +8,18 @@
 - Java & Spring boot
 # Installation
 01. Clone Repository and open project in IDE
-02. [Set up database](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#setting-up-database)
+02. Set up database
 03. Run application
 ## Setting up database
-01. Run Docker
-02. Run Docker compose using following command `docker compose up` from the root of the project
-03. Open [pgAdmin](http://localhost:5050/browser/)
-04. Set master password for pgAdmin
-05. Add a new server in pgAdmin:
+01. Start docker daemon os unix based systems or docker desktop on windows based systems.
+02. Change directory to root of project using `cd /yoga-class-refactor/` then run Docker compose using `docker compose up`
+3. Open [pgAdmin](http://localhost:5050/browser/)
+4. Set master password for pgAdmin
+5. Add a new server in pgAdmin:
     - Set server name in general tab
     - Set Host name/address in connection tab (get the address using command `docker inspect postgres_container | grep IPAddress`)
     - Set username = `mustafa` & password = `123456789` in connection tab
-06. Create database with name `yoga-class-app`
+6. Create database with name `yoga-class-app`
 # API Documentation
 1. Open [Swagger](http://localhost:8080/swagger-ui/index.html#) to test CRUD operations
 2. [Create operation](https://github.com/web-development-course-way/Yoga-Class-Refactored/tree/enhancement/docs?tab=readme-ov-file#creating)
