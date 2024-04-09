@@ -33,13 +33,6 @@ public class UserControllerV2  implements BaseController<User, UserDTO>{
     }
 
 
-    @PostMapping("/")
-    public APIResponse<UserDTO> create(@RequestBody User user) {
-        UserDTO newUser = userService.create(user);
-        return APIResponse.ok(newUser);
-    }
-
-
     @PutMapping("/{id}")
     public APIResponse<UserDTO> update(@PathVariable UUID id, @RequestBody User user) {
         UserDTO updatedUser = userService.update(id, user);

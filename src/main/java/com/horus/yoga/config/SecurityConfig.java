@@ -20,9 +20,9 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/v2/**").authenticated()
-                        .requestMatchers("/api/v1/**","/swagger-ui/**").permitAll())
+                        .requestMatchers("/api/v1/users/**","/swagger-ui/**","/api/v1/register/**").permitAll())
                 .formLogin(Customizer.withDefaults())
-
+                .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
