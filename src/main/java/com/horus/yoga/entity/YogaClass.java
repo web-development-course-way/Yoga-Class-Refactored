@@ -12,6 +12,7 @@ public class YogaClass extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "class_id")
     private UUID id;
 
     @Column(nullable = false, length = 50)

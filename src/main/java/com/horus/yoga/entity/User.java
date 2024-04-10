@@ -1,11 +1,14 @@
 package com.horus.yoga.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.horus.yoga.config.Auditable;
 import com.horus.yoga.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +17,7 @@ public class User extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private UUID id;
 
     @Column(name = "first_name", length = 50, nullable = false)
@@ -32,6 +36,7 @@ public class User extends Auditable {
     @Email
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
 
@@ -43,6 +48,10 @@ public class User extends Auditable {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="user",fetch=FetchType.EAGER)
+    private Set<Authority> authorities;
 
     public UUID getId() {
         return id;
@@ -122,6 +131,15 @@ public class User extends Auditable {
 
     public User setRole(Role role) {
         this.role = role;
+        return this;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public User setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
         return this;
     }
 }

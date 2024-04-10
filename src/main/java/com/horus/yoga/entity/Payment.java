@@ -13,18 +13,19 @@ public class Payment extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "payment_id")
     private UUID id;
 
 
     @ManyToOne
     @JoinColumn(name = "user_id",
-                referencedColumnName = "id")
+                referencedColumnName = "user_id")
     private User userId;
 
 
     @ManyToOne
     @JoinColumn(name = "package_id",
-                referencedColumnName = "id")
+                referencedColumnName = "bundle_id")
     private Bundle packageId;
 
     @Column(nullable = false)

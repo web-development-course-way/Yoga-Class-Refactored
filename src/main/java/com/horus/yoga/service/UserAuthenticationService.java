@@ -1,5 +1,6 @@
 package com.horus.yoga.service;
 
+import com.horus.yoga.entity.Authority;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -32,15 +34,20 @@ public class UserAuthenticationService implements AuthenticationProvider {
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         User user = userRepository.findByEmail(username).get();
-
         if (passwordEncoder.matches(pwd, user.getPassword())) {
-            List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ADMIN"));
-            return new UsernamePasswordAuthenticationToken(username, pwd, authorities);
+            return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(user.getAuthorities()));
         } else {
             throw new BadCredentialsException("Invalid password!");
         }
 
+    }
+
+    private List<GrantedAuthority> getGrantedAuthorities(Set<Authority> authorities) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (Authority authority : authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
+        }
+        return grantedAuthorities;
     }
 
     @Override

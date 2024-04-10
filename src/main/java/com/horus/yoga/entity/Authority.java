@@ -1,30 +1,25 @@
 package com.horus.yoga.entity;
 
-
-import com.horus.yoga.config.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
 @Entity
-@Table(name = "bundle")
-public class Bundle extends Auditable {
+@Table(name = "authority")
+public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "bundle_id")
+    @Column(name = "authority_id")
     private UUID id;
 
-    @Column(nullable = false,length = 50,unique = true)
-    @Size(min = 3)
+    @Column(length = 50, nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private int price;
-
-    @Column(nullable = false)
-    private int numberOfClasses;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public UUID getId() {
         return id;
@@ -42,11 +37,11 @@ public class Bundle extends Auditable {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public User getUser() {
+        return user;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

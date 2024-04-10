@@ -16,3 +16,10 @@ spring:
     user:
       name: user
       password: 12345
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          web:
+            FilterChainProxy: Debug
