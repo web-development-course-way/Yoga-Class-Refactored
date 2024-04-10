@@ -14,6 +14,7 @@ public class UserUpdate {
                 .setPhone(user.getPhone() != null ? user.getPhone() : existingUser.getPhone())
                 .setLastName(user.getLastName() != null ? user.getLastName() : existingUser.getLastName())
                 .setDateOfBirth(user.getDateOfBirth() != null ? user.getDateOfBirth() : existingUser.getDateOfBirth())
-                .setPassword(user.getPassword() !=null ? user.getPassword(): existingUser.getPassword());
+                .setPassword(user.getPassword() !=null ? user.getPassword() : existingUser.getPassword())
+                .setAuthorities(user.getAuthorities() !=null ? user.getAuthorities() : existingUser.getAuthorities());
     }
 }
