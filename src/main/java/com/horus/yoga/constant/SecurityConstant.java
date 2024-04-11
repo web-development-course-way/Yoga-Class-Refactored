@@ -2,6 +2,6 @@ package com.horus.yoga.constant;
 
 public interface SecurityConstant {
 
-    public static final String JWT_KEY = "jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4";
-    public static final String JWT_HEADER = "Authorization";
+    String JWT_KEY = "jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4";
+    String JWT_HEADER = "Authorization";
 }

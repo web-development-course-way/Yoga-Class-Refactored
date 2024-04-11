@@ -55,7 +55,5 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         }
         return String.join(",", authoritiesSet);
     }
-
-
 }
-}
+

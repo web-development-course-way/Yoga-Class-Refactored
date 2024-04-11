@@ -46,7 +46,7 @@ public class SecurityConfig {
                     .requestMatchers("/api/v1/users/**"
                                             , "/swagger-ui/**"
                                             , "/api/v1/register/**").permitAll()
-                    .requestMatchers("/api/v2/**").hasRole("ADMIN"))
+                    .requestMatchers("/api/v2/class/**").hasRole("ADMIN"))
 //                    .requestMatchers().hasAuthority()
 //                    .requestMatchers().hasAnyRole())
             .formLogin(Customizer.withDefaults())
