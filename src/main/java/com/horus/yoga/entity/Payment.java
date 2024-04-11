@@ -24,9 +24,9 @@ public class Payment extends Auditable {
 
 
     @ManyToOne
-    @JoinColumn(name = "package_id",
+    @JoinColumn(name = "bundle_id",
                 referencedColumnName = "bundle_id")
-    private Bundle packageId;
+    private Bundle bundleId;
 
     @Column(nullable = false)
     private int amount;
