@@ -23,3 +23,7 @@ logging:
         security:
           web:
             FilterChainProxy: Debug
+
+jwt:
+  secret: jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4
+  header: Authorization
