@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements BaseService <User, UserDTO>{
+public class UserService implements BaseService<User, UserDTO> {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -53,19 +54,19 @@ public class UserService implements BaseService <User, UserDTO>{
 
     @Override
     public UserDTO update(UUID id, User user) {
-       if (userRepository.existsById(id)){
-           User existingUser = userRepository.findById(id).get();
-           User updatedUser = UserUpdate.update(user,existingUser);
-           User savedUser = userRepository.save(updatedUser);
-           return userMapper.userToUserDTO(savedUser);
-       } else {
-           throw new NoSuchElementException();
-       }
+        if (userRepository.existsById(id)) {
+            User existingUser = userRepository.findById(id).get();
+            User updatedUser = UserUpdate.update(user, existingUser);
+            User savedUser = userRepository.save(updatedUser);
+            return userMapper.userToUserDTO(savedUser);
+        } else {
+            throw new NoSuchElementException();
+        }
     }
 
     @Override
     public void delete(UUID id) {
-        if (userRepository.existsById(id)){
+        if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
         } else {
             throw new NoSuchElementException();
