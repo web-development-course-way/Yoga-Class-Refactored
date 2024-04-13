@@ -27,11 +27,11 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String token = request.getHeader("Authorization");
 
-        if (token != null && token.startsWith("Bearer ")) {
+        if (token != null && token.startsWith("Bearer ")) { // only works in authentication and not sign in
             token = token.substring(7); // Remove "Bearer " prefix
             if (jwtTokenUtil.validateToken(token)) {
                 // Token is valid, continue processing the request
-                filterChain.doFilter(request, response);
+
                 return;
             } else {
                 // Invalid token, handle error (e.g., send unauthorized response)
@@ -40,5 +40,6 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                 return;
             }
         }
+        filterChain.doFilter(request, response);
     }
 }
