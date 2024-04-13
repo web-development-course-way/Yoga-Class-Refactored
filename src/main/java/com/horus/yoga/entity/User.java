@@ -17,7 +17,6 @@ public class User extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "user_id")
     private UUID id;
 
     @Column(name = "first_name", length = 50, nullable = false)
@@ -141,5 +140,21 @@ public class User extends Auditable {
     public User setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", role=" + role +
+                ", authorities=" + authorities +
+                '}';
     }
 }

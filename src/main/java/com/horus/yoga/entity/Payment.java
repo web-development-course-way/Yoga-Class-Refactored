@@ -19,7 +19,7 @@ public class Payment extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "user_id",
-                referencedColumnName = "user_id")
+                referencedColumnName = "id")
     private User userId;
 
 
