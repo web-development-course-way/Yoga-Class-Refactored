@@ -39,36 +39,25 @@ public class SecurityConfig {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
 
-        JWTTokenUtil JWTTokenUtil;
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .cors(corsCustomizer -> corsCustomizer.configurationSource(request -> {
-                CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("*"));
-                config.setAllowedMethods(Collections.singletonList("*"));
-                config.setAllowCredentials(true);
-                config.setMaxAge(3600L);
-                return config;
-                }))
-            .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers("/api/v2/**").authenticated()
-                    .requestMatchers("/api/v1/users/**"
-                                            , "/swagger-ui/**"
-                                            , "/api/v1/register/**").permitAll()
-                    .requestMatchers("/api/v2/class/**").hasRole("ADMIN"))
-            .formLogin(Customizer.withDefaults())
-            .httpBasic(Customizer.withDefaults())
-            .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers(
-                                                    "/api/v1/users/**","/api/v1/register/**")
-                                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-            .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-            .addFilterAfter(new JWTTokenGeneratorFilter(),BasicAuthenticationFilter.class)
-            .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class);
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).cors(corsCustomizer -> corsCustomizer.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(Collections.singletonList("*"));
+                    config.setAllowedMethods(Collections.singletonList("*"));
+                    config.setAllowCredentials(true);
+                    config.setMaxAge(3600L);
+                    return config;
+                })).authorizeHttpRequests((requests) -> requests.requestMatchers("/**").permitAll() //TODO: this should be removed
+                        .requestMatchers("/api/v2/**").authenticated().requestMatchers("/api/v1/users/**", "/swagger-ui/**", "/api/v1/**").permitAll()
+                        .requestMatchers("/api/v2/class/**").hasRole("ADMIN"))
+//                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class) //TODO: this was causing errors
+                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class).formLogin(Customizer.withDefaults()).httpBasic(Customizer.withDefaults()).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/api/v1/users/**", "/api/v1/register/**").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

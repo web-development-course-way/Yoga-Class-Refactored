@@ -40,6 +40,11 @@ public class UserService implements BaseService <User, UserDTO>{
                 .get();
     }
 
+    public User getUserByEmail(String email){
+        Optional<User> user =  userRepository.findByEmail(email);
+        return user.orElse(null);
+    }
+
     @Override
     public UserDTO create(User user) {
         User newUser = userRepository.save(user);
