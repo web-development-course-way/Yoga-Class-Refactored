@@ -5,6 +5,7 @@ import com.horus.yoga.dto.UserDTO;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.service.UserService;
 import com.horus.yoga.util.APIResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class UserControllerV2 {
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('Instructor')")
     public APIResponse<List<UserDTO>> getAll() {
         List<UserDTO> users = userService.getAll();
         return APIResponse.ok(users);

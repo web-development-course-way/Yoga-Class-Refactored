@@ -1,8 +1,10 @@
 package com.horus.yoga.config;
 
 import com.horus.yoga.util.JwtAuthConverter;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.config.Customizer;
@@ -28,6 +30,7 @@ public class SecurityConfig {
     }
 
     @Bean
+    @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
@@ -41,6 +44,7 @@ public class SecurityConfig {
                 t -> t.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
+
     @Bean
     public DefaultMethodSecurityExpressionHandler msecurity() {
         DefaultMethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler =
