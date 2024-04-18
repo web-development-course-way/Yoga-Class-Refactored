@@ -33,8 +33,9 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
             List<GrantedAuthority> roles = new ArrayList<>();
 
             for (String keycloakRole : keycloakRoles) {
-                System.out.println("keycloakRole:   " + keycloakRole);
-                roles.add(new SimpleGrantedAuthority(keycloakRole));
+                String lowercase = keycloakRole.toLowerCase();
+                System.out.println("keycloakRole:   " + lowercase);
+                roles.add(new SimpleGrantedAuthority(lowercase));
             }
             return roles;
         }
