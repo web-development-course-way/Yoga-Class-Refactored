@@ -23,7 +23,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 
-@Service
+//@Service
 public class JWTTokenUtil {
 
     private final Algorithm hmac512;

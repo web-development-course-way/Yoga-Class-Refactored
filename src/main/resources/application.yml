@@ -1,4 +1,12 @@
 spring:
+  security:
+    user:
+      name: user
+      password: 12345
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/Yoga-class-application
   datasource:
     url: jdbc:postgresql://localhost:5432/yoga-class-app
     username: mustafa
@@ -12,10 +20,8 @@ spring:
     generate-ddl: true
     properties:
       hibernate.format_sql: true
-  security:
-    user:
-      name: user
-      password: 12345
+
+
 logging:
   level:
     org:

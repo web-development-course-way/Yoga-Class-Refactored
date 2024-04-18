@@ -26,20 +26,21 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String token = request.getHeader("Authorization");
+        System.out.println("token "+ token);
 
-        if (token != null && token.startsWith("Bearer ")) { // only works in authentication and not sign in
-            token = token.substring(7); // Remove "Bearer " prefix
-            if (jwtTokenUtil.validateToken(token)) {
-                // Token is valid, continue processing the request
-
-                return;
-            } else {
-                // Invalid token, handle error (e.g., send unauthorized response)
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token");
-                return;
-            }
-        }
+//        if (token != null && token.startsWith("Bearer ")) { // only works in authentication and not sign in
+//            token = token.substring(7); // Remove "Bearer " prefix
+//            if (jwtTokenUtil.validateToken(token)) {
+//                // Token is valid, continue processing the request
+//
+//                return;
+//            } else {
+//                // Invalid token, handle error (e.g., send unauthorized response)
+//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token");
+//                return;
+//            }
+//        }
         filterChain.doFilter(request, response);
     }
 }
