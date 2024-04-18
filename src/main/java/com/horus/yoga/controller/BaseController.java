@@ -9,8 +9,6 @@ public interface BaseController<Entity, DTO> {
 
     APIResponse<List<DTO>> getAll();
 
-    APIResponse<DTO> create(Entity object);
-
     APIResponse<DTO> update(UUID id, Entity object);
 
     APIResponse<String> delete(UUID id);
