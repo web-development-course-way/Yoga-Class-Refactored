@@ -34,10 +34,21 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
-        http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
-//                .requestMatchers(HttpMethod.GET, "/public/**","/api/v1/users/**").permitAll()
-//                .requestMatchers(HttpMethod.POST, "/public/**","/api/v1/users/**").permitAll());
-//                .anyRequest().authenticated());
+        http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(HttpMethod.GET, "/public/**"
+                                                        ,"/api/v1/users/**"
+                                                        ,"/keycloak/**",
+                                                        "/swagger-ui/**",
+                                                        "/v3/api-docs/**",
+                                                        "/error",
+                                                        "/keycloak/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/public/**"
+                                                        ,"/api/v1/users/**"
+                                                        ,"/keycloak/**"
+                                                        ,"/swagger-ui/**"
+                                                        ,"/v3/api-docs/**").permitAll()
+                .requestMatchers(HttpMethod.HEAD,"/swagger-ui/**").permitAll()
+                .anyRequest().authenticated());
         http.oauth2ResourceServer(t->t.jwt(Customizer.withDefaults()));
 //                t-> t.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter)));
         http.sessionManagement(

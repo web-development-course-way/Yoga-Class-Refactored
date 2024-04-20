@@ -28,12 +28,16 @@ public class KeycloakSecurityUtil {
     @Value("${keycloak.password}")
     private String password;
 
+    @Value("${keycloak.client-secret}")
+    private String clientSecret;
+
     public Keycloak getKeycloakInstance() {
         if(keycloak == null) {
             keycloak = KeycloakBuilder
                     .builder().serverUrl(serverUrl).realm(realm)
                     .clientId(clientId).grantType(grantType)
-                    .username(username).password(password).build();
+                    .username(username).password(password).clientSecret(clientSecret).build();
+            System.out.println("i was here");
         }
         return keycloak;
     }

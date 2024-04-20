@@ -31,6 +31,7 @@ keycloak:
   realm: spring
   server-url: http://localhost:8081
   client-id: springer
+  client-secret: wdGjvFAHmelEG1B6ODwqZB8oz28HCXK6
   grant-type: password
   name: mustafa
   password: admin
