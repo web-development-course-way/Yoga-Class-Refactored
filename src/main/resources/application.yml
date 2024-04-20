@@ -27,3 +27,10 @@ logging:
         security:
           web:
             FilterChainProxy: Debug
+keycloak:
+  realm: spring
+  server-url: http://localhost:8081
+  client-id: springer
+  grant-type: password
+  name: mustafa
+  password: admin
