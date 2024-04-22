@@ -1,7 +1,6 @@
 package com.horus.yoga.entity;
 
 import com.horus.yoga.config.Auditable;
-import com.horus.yoga.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -16,30 +15,27 @@ public class User extends Auditable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name="first_name",length = 50, nullable = false)
+    @Column(name = "first_name", length = 50, nullable = false)
     @Size(min = 3)
     private String firstName;
 
-    @Column(name="last_name",length = 50, nullable = false)
+    @Column(name = "last_name", length = 50, nullable = false)
     @Size(min = 3)
     private String lastName;
 
-    @Column(unique = true,nullable = false,length = 11)
+    @Column(unique = true, nullable = false, length = 11)
     @Pattern(regexp = "\\+?[0-9]+", message = "Invalid phone number")
     private String phone;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     @Email
     private String email;
 
     private String nationality;
 
-    @Column(name="date_of_birth",nullable = false)
+    @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
-    @Column(nullable = false)
-    @Enumerated (EnumType.STRING)
-    private Role role;
 
     public UUID getId() {
         return id;
@@ -101,15 +97,6 @@ public class User extends Auditable {
 
     public User setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-        return this;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public User setRole(Role role) {
-        this.role = role;
         return this;
     }
 }
