@@ -29,12 +29,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.when;
 
 
-@ExtendWith({MockitoExtension.class})
-@SpringBootTest
-@ContextConfiguration(classes = HorusApplication.class)
-@ComponentScan(basePackages = "*")
-@DecoratedWith(UserMapper.class)
-
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
     @Mock
@@ -43,8 +38,6 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    @Mock
-    private UserMapper userMapper;
 
     //test create method
     //create user class using builder.
@@ -63,9 +56,9 @@ public class UserServiceTest {
 
         when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
-        UserDTO savedDTO = userService.create(user);
+        User savedUser = userService.createWithoutDTO(user);
 
-        Assertions.assertNotNull(savedDTO);
+        Assertions.assertNotNull(savedUser);
 
     }
 

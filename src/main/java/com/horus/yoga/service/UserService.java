@@ -48,6 +48,12 @@ public class UserService implements BaseService <User, UserDTO>{
         return userMapper.userToUserDTO(newUser);
     }
 
+
+    public User createWithoutDTO(User user) {
+        User newUser = userRepository.save(user);
+        return newUser;
+    }
+
     @Override
     public UserDTO update(UUID id, User user) {
        if (userRepository.existsById(id)){
