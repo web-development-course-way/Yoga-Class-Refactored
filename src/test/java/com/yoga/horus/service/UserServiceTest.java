@@ -7,9 +7,7 @@ import com.horus.yoga.dtoMapper.UserMapperImpl;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.repository.UserRepository;
 import com.horus.yoga.service.UserService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.InjectMocks;
@@ -36,19 +34,30 @@ public class UserServiceTest {
     @Spy
     private UserMapper userMapper = new UserMapperImpl();
 
+    private static User user1, user2;
+
+    @BeforeAll
+    public static void createTestUsers() {
+        user1 = new User().setEmail("MrDeeb@gmail.com")
+                .setFirstName("Ahmad")
+                .setLastName("Al-Deeb")
+                .setPhone("0121121212")
+                .setDateOfBirth(new Date());
+
+        user2 = new User().setEmail("andrew@gmail.com")
+                .setFirstName("Andrew")
+                .setLastName("Seif")
+                .setPhone("01313131313")
+                .setDateOfBirth(new Date());
+
+    }
 
     @Test
-    @DisplayName("Creation for the user object")
+    @DisplayName("Create user")
     public void createUserTest(){
-        User user = new User().setEmail("deebo@gmail.com")
-                              .setFirstName("Deeb")
-                              .setLastName("Deboo")
-                              .setPhone("018822447")
-                              .setDateOfBirth(new Date());
+        when(userRepository.save(Mockito.any(User.class))).thenReturn(user1);
 
-        when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
-
-        UserDTO savedDTO = userService.create(user);
+        UserDTO savedDTO = userService.create(user1);
 
         Assertions.assertNotNull(savedDTO);
 
