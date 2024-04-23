@@ -17,9 +17,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.Mockito.when;
 
@@ -40,13 +38,15 @@ public class UserServiceTest {
 
     @BeforeAll
     public static void createTestUsers() {
-        user1 = new User().setEmail("MrDeeb@gmail.com")
+        user1 = new User().setId(UUID.randomUUID())
+                .setEmail("MrDeeb@gmail.com")
                 .setFirstName("Ahmad")
                 .setLastName("Al-Deeb")
                 .setPhone("0121121212")
                 .setDateOfBirth(new Date());
 
-        user2 = new User().setEmail("andrew@gmail.com")
+        user2 = new User().setId(UUID.randomUUID())
+                .setEmail("andrew@gmail.com")
                 .setFirstName("Andrew")
                 .setLastName("Seif")
                 .setPhone("01313131313")
@@ -73,6 +73,17 @@ public class UserServiceTest {
         List<UserDTO> users = userService.getAll();
 
         Assertions.assertEquals(2, users.size(), "userService.getAll() should return 2 users");
+    }
+
+    @Test
+    @DisplayName("Get existing user")
+    public void getExistingUser() {
+        when(userRepository.findById(user1.getId())).thenReturn(Optional.of(user1));
+
+        Optional<UserDTO> foundUser = Optional.of(userService.getOne(user1.getId()));
+
+        Assertions.assertTrue(foundUser.isPresent(), "User was not found");
+        Assertions.assertEquals(userMapper.userToUserDTO(user1), foundUser.get(), "Users must be the same");
     }
 
 }
