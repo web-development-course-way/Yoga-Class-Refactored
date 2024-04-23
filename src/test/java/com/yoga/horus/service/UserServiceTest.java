@@ -86,4 +86,16 @@ public class UserServiceTest {
         Assertions.assertEquals(userMapper.userToUserDTO(user1), foundUser.get(), "Users must be the same");
     }
 
+//    @Test
+//    @DisplayName("Get not existing user")
+//    public void getNotExistingUser() {
+//        UUID randomId = UUID.randomUUID();
+//
+//        when(userRepository.findById(randomId)).thenReturn(Optional.empty());
+//
+//        Optional<UserDTO> foundUser = Optional.ofNullable(userService.getOne(randomId));
+//
+//        Assertions.assertFalse(foundUser.isPresent(), "User was not found");
+//    }
+
 }
