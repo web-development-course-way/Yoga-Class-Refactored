@@ -80,7 +80,7 @@ public class UserServiceTest {
     public void getExistingUser() {
         when(userRepository.findById(user1.getId())).thenReturn(Optional.of(user1));
 
-        Optional<UserDTO> foundUser = Optional.of(userService.getOne(user1.getId()));
+        Optional<UserDTO> foundUser = Optional.ofNullable(userService.getOne(user1.getId()));
 
         Assertions.assertTrue(foundUser.isPresent(), "User was not found");
         Assertions.assertEquals(userMapper.userToUserDTO(user1), foundUser.get(), "Users must be the same");
