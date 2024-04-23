@@ -17,7 +17,9 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -63,6 +65,14 @@ public class UserServiceTest {
 
     }
 
+    @Test
+    @DisplayName("Get all users")
+    public void getAllUsersTest() {
+        when(userRepository.findAll()).thenReturn(Arrays.asList(user1, user2));
 
+        List<UserDTO> users = userService.getAll();
+
+        Assertions.assertEquals(2, users.size(), "userService.getAll() should return 2 users");
+    }
 
 }
