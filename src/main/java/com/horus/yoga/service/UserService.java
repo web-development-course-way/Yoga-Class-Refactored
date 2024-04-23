@@ -40,18 +40,10 @@ public class UserService implements BaseService <User, UserDTO>{
                 .get();
     }
 
-
-
     @Override
     public UserDTO create(User user) {
         User newUser = userRepository.save(user);
         return userMapper.userToUserDTO(newUser);
-    }
-
-
-    public User createWithoutDTO(User user) {
-        User newUser = userRepository.save(user);
-        return newUser;
     }
 
     @Override
