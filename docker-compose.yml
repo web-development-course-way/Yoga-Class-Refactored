@@ -29,6 +29,19 @@ services:
     networks:
       - postgres
 
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: true
+    volumes:
+     - sonarqube_data:/opt/sonarqube/data
+     - sonarqube_extensions:/opt/sonarqube/extensions
+     - sonarqube_logs:/opt/sonarqube/logs
+    networks:
+      - postgres
+
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.2
     ports:
@@ -50,3 +63,6 @@ volumes:
   postgres:
   pgadmin:
   keycloak:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:

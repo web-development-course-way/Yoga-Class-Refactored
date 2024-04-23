@@ -40,8 +40,6 @@ public class UserService implements BaseService <User, UserDTO>{
                 .get();
     }
 
-
-
     @Override
     public UserDTO create(User user) {
         User newUser = userRepository.save(user);
