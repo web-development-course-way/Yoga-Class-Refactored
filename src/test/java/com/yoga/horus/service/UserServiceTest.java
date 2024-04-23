@@ -59,9 +59,9 @@ public class UserServiceTest {
     public void createUserTest(){
         when(userRepository.save(Mockito.any(User.class))).thenReturn(user1);
 
-        UserDTO savedDTO = userService.create(user1);
+        UserDTO savedUser = userService.create(user1);
 
-        Assertions.assertNotNull(savedDTO);
+        Assertions.assertNotNull(savedUser, "The saved user should not be null");
 
     }
 
@@ -70,9 +70,9 @@ public class UserServiceTest {
     public void getAllUsersTest() {
         when(userRepository.findAll()).thenReturn(Arrays.asList(user1, user2));
 
-        List<UserDTO> users = userService.getAll();
+        List<UserDTO> foundUsers = userService.getAll();
 
-        Assertions.assertEquals(2, users.size(), "userService.getAll() should return 2 users");
+        Assertions.assertEquals(2, foundUsers.size(), "userService.getAll() should return 2 users");
     }
 
     @Test
