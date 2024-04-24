@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   postgres:
-    container_name: postgres_container
+    container_name: postgresql
     image: postgres
     environment:
       POSTGRES_USER: user
@@ -16,7 +16,7 @@ services:
       - postgres
 
   pgadmin:
-    container_name: pgadmin_container
+    container_name: pgadmin
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
@@ -31,6 +31,7 @@ services:
 
   sonarqube:
     image: sonarqube:latest
+    container_name: sonarqube
     ports:
       - "9000:9000"
     environment:
@@ -44,6 +45,7 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.2
+    container_name: keycloak
     ports:
       - "8081:8080"
     environment:
@@ -54,6 +56,16 @@ services:
       - postgres
     volumes:
       - keycloak:/var/lib/keycloak
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - postgres
+    volumes:
+      - redis:/var/lib/redis
 
 networks:
   postgres:
@@ -66,3 +78,4 @@ volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
+  redis:
