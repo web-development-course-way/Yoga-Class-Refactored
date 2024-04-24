@@ -26,7 +26,7 @@ public class UserController implements BaseController<User, UserDTO> {
         return APIResponse.ok(user);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public APIResponse<List<UserDTO>> getAll() {
         List<UserDTO> users = userService.getAll();
         return APIResponse.ok(users);
