@@ -33,7 +33,7 @@ public class UserController implements BaseController<User, UserDTO> {
     }
 
 
-    @PostMapping
+    @PostMapping("/")
     public APIResponse<UserDTO> create(@RequestBody User user) {
         UserDTO newUser = userService.create(user);
         return APIResponse.ok(newUser);
