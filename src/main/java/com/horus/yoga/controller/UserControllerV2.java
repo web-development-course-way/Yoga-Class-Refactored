@@ -23,7 +23,7 @@ public class UserControllerV2 {
 
     @GetMapping("/{id}")
     public APIResponse<UserDTO> getById(@PathVariable UUID id) {
-        UserDTO user= userService.getOne(id);
+        UserDTO user= userService.getOne(id).get();
         return APIResponse.ok(user);
     }
 
