@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,10 +35,8 @@ public class UserService implements BaseService <User, UserDTO>{
     }
 
     @Override
-    public UserDTO getOne(UUID id) {
-        return userRepository.findById(id)
-                .map(userMapper::userToUserDTO)
-                .get();
+    public Optional<UserDTO> getOne(UUID id) {
+        return userRepository.findById(id).map(userMapper::userToUserDTO);
     }
 
     @Override
