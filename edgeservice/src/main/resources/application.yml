@@ -63,7 +63,7 @@ spring:
 resilience4j:
   circuitbreaker:
     instances:
-      bookService:
+      userService-v1:
         slidingWindowSize: 10
         permittedNumberOfCallsInHalfOpenState: 5
         failureRateThreshold: 50

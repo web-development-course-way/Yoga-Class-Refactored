@@ -42,7 +42,7 @@ class FallbackController {
 
 //	private static final Logger log = LoggerFactory.getLogger(FallbackController.class);
 
-	@GetMapping("/books-fallback")
+	@GetMapping("/users-fallback")
 	Flux<Void> getBooksFallback() {
 //		log.info("Fallback for book service");
 		return Flux.empty();

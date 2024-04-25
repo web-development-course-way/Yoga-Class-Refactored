@@ -27,7 +27,7 @@ public class UserControllerV2 {
         return APIResponse.ok(user);
     }
 
-    @GetMapping("/")
+    @GetMapping
     @PreAuthorize("hasRole('instructor')")
     public APIResponse<List<UserDTO>> getAll() {
         List<UserDTO> users = userService.getAll();
