@@ -66,7 +66,6 @@ services:
       - postgres
     volumes:
       - redis:/var/lib/redis
-
 networks:
   postgres:
     driver: bridge
