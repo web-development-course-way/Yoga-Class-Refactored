@@ -1,0 +1,75 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: edgeservice
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: springer
+            client-secret: wdGjvFAHmelEG1B6ODwqZB8oz28HCXK6
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8081/realms/spring
+  cloud:
+    gateway:
+      default-filters:
+        - SaveSession
+        - TokenRelay
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              replenishRate: 100
+              burstCapacity: 200
+              requestedTokens: 1
+      routes:
+        - id: user-service-v2
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v2/users/**
+          filters:
+            - AddRequestHeader=X-Tenant,yoga-class-v2
+            - name: CircuitBreaker
+              args:
+                name: userService
+                fallbackUri: forward:/users-fallback
+            - name: Retry
+              args:
+                retries: 3
+                method: GET
+                backoff:
+                  firstBackoff: 50ms
+                  maxBackoff: 500ms
+        - id: user-service-v1
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - AddRequestHeader=X-Tenant,yoga-class-v1
+            - name: CircuitBreaker
+              args:
+                name: userService-v1
+                fallbackUri: forward:/users-fallback
+            - name: Retry
+              args:
+                retries: 3
+                method: GET
+                backoff:
+                  firstBackoff: 50ms
+                  maxBackoff: 500ms
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService-v1:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        registerHealthIndicator: true
+  timelimiter:
+    instances:
+      userService-v1:
+        timeoutDuration: 3s

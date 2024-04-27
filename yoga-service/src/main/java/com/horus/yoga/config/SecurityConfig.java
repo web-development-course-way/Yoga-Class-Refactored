@@ -40,17 +40,16 @@ public class SecurityConfig {
                                                         ,"/keycloak/**",
                                                         "/swagger-ui/**",
                                                         "/v3/api-docs/**",
-                                                        "/error",
-                                                        "/keycloak/**").permitAll()
+                                                        "/error").permitAll()
                 .requestMatchers(HttpMethod.POST, "/public/**"
                                                         ,"/api/v1/users/**"
                                                         ,"/keycloak/**"
                                                         ,"/swagger-ui/**"
                                                         ,"/v3/api-docs/**").permitAll()
-                .requestMatchers(HttpMethod.HEAD,"/swagger-ui/**").permitAll()
+//                .requestMatchers(HttpMethod.HEAD,"/swagger-ui/**").permitAll()
                 .anyRequest().authenticated());
-        http.oauth2ResourceServer(t->t.jwt(Customizer.withDefaults()));
-//                t-> t.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter)));
+        http.oauth2ResourceServer(
+                t-> t.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter)));
         http.sessionManagement(
                 t -> t.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
