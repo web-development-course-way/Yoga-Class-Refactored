@@ -37,9 +37,9 @@ services:
     environment:
       SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: true
     volumes:
-     - sonarqube_data:/opt/sonarqube/data
-     - sonarqube_extensions:/opt/sonarqube/extensions
-     - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
     networks:
       - postgres
 
@@ -66,6 +66,30 @@ services:
       - postgres
     volumes:
       - redis:/var/lib/redis
+
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.51.1
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    networks:
+      - postgres
+    volumes:
+      - ./src/observability/prometheus-config.yaml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    ports:
+      - 3000:3000
+    networks:
+      - postgres
+    volumes:
+      - grafana:/var/lib/grafana
+
+
+
+
+
 networks:
   postgres:
     driver: bridge
@@ -78,3 +102,6 @@ volumes:
   sonarqube_extensions:
   sonarqube_logs:
   redis:
+  grafana:
+  prometheus:
+
