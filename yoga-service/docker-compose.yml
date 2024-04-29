@@ -75,7 +75,9 @@ services:
     networks:
       - postgres
     volumes:
-      - ./src/observability/prometheus-config.yaml:/etc/prometheus/prometheus.yml
+      - ./src/observability/prometheus-config.yaml:/etc/prometheus/prometheus.yaml
+
+
   grafana:
     image: grafana/grafana-enterprise
     container_name: grafana
