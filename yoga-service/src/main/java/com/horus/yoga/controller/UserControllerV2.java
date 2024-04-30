@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v2/users")
 public class UserControllerV2 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerV2.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerV2.class);
 
     private final UserService userService;
 
@@ -33,7 +33,7 @@ public class UserControllerV2 {
     @GetMapping
     @PreAuthorize("hasRole('instructor')")
     public APIResponse<List<UserDTO>> getAll() {
-        LOGGER.info("getting all users {}", 0);
+//        LOGGER.info("getting all users {}", 0);
         List<UserDTO> users = userService.getAll();
         return APIResponse.ok(users);
     }

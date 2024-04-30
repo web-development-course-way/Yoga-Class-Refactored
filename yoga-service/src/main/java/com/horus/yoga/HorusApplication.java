@@ -20,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 public class HorusApplication {
 
-	private static final Log logger = LogFactory.getLog(HorusApplication.class);
+//	private static final Log logger = LogFactory.getLog(HorusApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(HorusApplication.class, args);

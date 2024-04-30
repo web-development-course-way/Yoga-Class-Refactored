@@ -2,38 +2,16 @@ receivers:
   otlp:
     protocols:
       http:
-      grpc:
 
 processors:
   # batch metrics before sending to reduce API usage
   batch:
 
 exporters:
-  otlp:
-    endpoint: "jaeger:4317"
-    tls:
-      insecure: true
-  logging:
-    loglevel: info
-  jaeger:
-    endpoint: jaeger-service:14250
-    tls:
-      insecure: true
-
-  loki:
-    endpoint: "http://loki:3100/loki/api/v1/push"
-
   prometheus:
     endpoint: "0.0.0.0:8889"
-#    const_labels:
-#      label1: value1
-
-#  otlp:
-#    endpoint: tempo:4317
-#    tls:
-#      insecure: true
-
-
+    const_labels:
+      label: mustafa
 
 # https://github.com/open-telemetry/opentelemetry-collector/blob/main/extension/README.md
 extensions:
@@ -51,10 +29,3 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [prometheus]
-    traces:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [otlp]
-    logs:
-      receivers: [otlp]
-      exporters: [loki]

@@ -40,13 +40,13 @@ public class EdgeserviceApplication {
 
 @RestController
 class FallbackController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FallbackController.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(FallbackController.class);
 
 //	private static final Logger log = LoggerFactory.getLogger(FallbackController.class);
 
     @GetMapping("/users-fallback")
     Flux<Void> getBooksFallback() {
-        LOGGER.info("redirecting to user-fallbackUrl {}", 5);
+//        LOGGER.info("redirecting to user-fallbackUrl {}", 5);
 
 //		log.info("Fallback for book service");
         return Flux.empty();

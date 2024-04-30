@@ -12,14 +12,14 @@ server:
 spring:
   application:
     name: edgeservice
-  spring:
-    sleuth:
-      otel:
-        config:
-          trace-id-ratio-based:1.0
-        exporter:
-          otlp:
-            endpoint:http://collector:4317
+#  spring:
+#    sleuth:
+#      otel:
+#        config:
+#          trace-id-ratio-based: 1.0
+#        exporter:
+#          otlp:
+#            endpoint: http://collector:4317
 
   security:
     oauth2:
@@ -27,7 +27,7 @@ spring:
         registration:
           keycloak:
             client-id: springer
-            client-secret: zf46xhdeWY1yYaeq7ApCQx8hybA97WFo
+            client-secret: 8U8IZTotTElfAeSQUZ52CH8p60eC9Qnk
             scope: openid
         provider:
           keycloak:
