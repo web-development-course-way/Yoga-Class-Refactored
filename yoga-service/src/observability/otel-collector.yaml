@@ -13,6 +13,12 @@ exporters:
     endpoint: "jaeger:4317"
     tls:
       insecure: true
+  logging:
+    loglevel: info
+  jaeger:
+    endpoint: jaeger-service:14250
+    tls:
+      insecure: true
 
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"

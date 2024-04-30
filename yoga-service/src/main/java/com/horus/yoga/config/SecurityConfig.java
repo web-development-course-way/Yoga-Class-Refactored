@@ -47,7 +47,8 @@ public class SecurityConfig {
                                                         ,"/swagger-ui/**"
                                                         ,"/v3/api-docs/**").permitAll()
 //                .requestMatchers(HttpMethod.HEAD,"/swagger-ui/**").permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().permitAll()
+        );
         http.oauth2ResourceServer(
                 t-> t.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter)));
         http.sessionManagement(
