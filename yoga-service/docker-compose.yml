@@ -70,6 +70,8 @@ services:
   prometheus:
     image: quay.io/prometheus/prometheus:v2.51.1
     container_name: prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yaml
     ports:
       - 9090:9090
     networks:
@@ -87,6 +89,43 @@ services:
       - postgres
     volumes:
       - grafana:/var/lib/grafana
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    container_name: collector
+    volumes:
+      - ./src/observability/otel-collector.yaml:/etc/otelcol-contrib/config.yaml
+    command:
+      - --config=/etc/otelcol-contrib/config.yaml
+    ports:
+      - 1888:1888 # pprof extension
+      - 8888:8888 # Prometheus metrics exposed by the Collector
+      - 8889:8889 # Prometheus exporter metrics
+      - 13133:13133 # health_check extension
+      - 4317:4317 # OTLP gRPC receiver
+      - 4318:4318 # OTLP http receiver
+      - 55679:55679 # zpages extension
+    networks:
+      - postgres
+    depends_on:
+      - jaeger
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268"
+      - "14250"
+    networks:
+      - postgres
+
+  loki:
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    networks:
+      - postgres
 
 
 
@@ -106,4 +145,5 @@ volumes:
   redis:
   grafana:
   prometheus:
+  otel-collector:
 

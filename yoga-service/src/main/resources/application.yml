@@ -1,4 +1,15 @@
+management:
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
+  tracing:
+    sampling:
+      probability: 1.0
+
 spring:
+  application:
+    name: user-service
   datasource:
     url: jdbc:postgresql://localhost:5432/yoga-class-app
     username: user
@@ -21,6 +32,9 @@ spring:
         jwt:
           issuer-uri: http://localhost:8081/realms/spring
 logging:
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+    include-application-name: false
   level:
     org:
       springframework:
@@ -31,7 +45,7 @@ keycloak:
   realm: spring
   server-url: http://localhost:8081
   client-id: springer
-  client-secret: wdGjvFAHmelEG1B6ODwqZB8oz28HCXK6
+  client-secret: 8U8IZTotTElfAeSQUZ52CH8p60eC9Qnk
   grant-type: password
   name: mustafa
   password: admin
