@@ -15,12 +15,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController implements BaseController<User, UserDTO> {
-//    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
     public UserController(UserService userService) {
-//        LOGGER.info("instantiating the controller {}", 0);
+        LOGGER.info("instantiating the controller {}", 0);
 
         this.userService = userService;
     }
@@ -33,7 +33,7 @@ public class UserController implements BaseController<User, UserDTO> {
 
     @GetMapping
     public APIResponse<List<UserDTO>> getAll() {
-//        LOGGER.info("getting all users {}", 0);
+        LOGGER.info("getting all users {}", 0);
 
         List<UserDTO> users = userService.getAll();
         return APIResponse.ok(users);

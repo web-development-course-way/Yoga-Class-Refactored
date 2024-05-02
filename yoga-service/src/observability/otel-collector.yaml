@@ -2,23 +2,39 @@ receivers:
   otlp:
     protocols:
       http:
+      grpc:
 
 processors:
   # batch metrics before sending to reduce API usage
   batch:
 
 exporters:
+  logging:
+    loglevel: debug
+
+  loki:
+    endpoint: "http://loki:3100/loki/api/v1/push"
+
   prometheus:
     endpoint: "0.0.0.0:8889"
     const_labels:
       label: mustafa
+
   zipkin:
     endpoint: "http://zipkin-all-in-one:9411/api/v2/spans"
     format: proto
+
   otlp:
     endpoint: http://jaeger:4317
     tls:
       insecure: true
+
+
+  otlp/2:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+
 
 # https://github.com/open-telemetry/opentelemetry-collector/blob/main/extension/README.md
 extensions:
@@ -35,8 +51,11 @@ service:
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [prometheus]
+      exporters: [logging,prometheus]
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp,zipkin]
+      exporters: [logging,otlp,otlp/2,zipkin]
+    logs:
+      receivers: [ otlp ]
+      exporters: [ loki,logging ]
