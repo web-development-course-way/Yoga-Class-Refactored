@@ -1,5 +1,7 @@
 package com.example.edgeservice;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,8 @@ import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 public class EdgeserviceApplication {
+
+    private static final Log logger = LogFactory.getLog(EdgeserviceApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(EdgeserviceApplication.class, args);
@@ -41,8 +45,6 @@ public class EdgeserviceApplication {
 @RestController
 class FallbackController {
 //    private static final Logger LOGGER = LoggerFactory.getLogger(FallbackController.class);
-
-//	private static final Logger log = LoggerFactory.getLogger(FallbackController.class);
 
     @GetMapping("/users-fallback")
     Flux<Void> getBooksFallback() {
