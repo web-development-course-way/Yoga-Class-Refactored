@@ -1,5 +1,7 @@
 package com.example.edgeservice;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -18,34 +20,38 @@ import reactor.core.publisher.Mono;
 @SpringBootApplication
 public class EdgeserviceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EdgeserviceApplication.class, args);
-	}
+    private static final Log logger = LogFactory.getLog(EdgeserviceApplication.class);
 
-	@Bean
-	KeyResolver keyResolver() {
-		return exchange -> Mono.just("ANONYMOUS");
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EdgeserviceApplication.class, args);
+    }
 
-	@Bean
-	SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-		return http
-				.authorizeExchange(exchange -> exchange.matchers(EndpointRequest.toAnyEndpoint()).permitAll()
-						.anyExchange().authenticated())
-				.oauth2Login(Customizer.withDefaults())
-				.build();
-	}
+    @Bean
+    KeyResolver keyResolver() {
+        return exchange -> Mono.just("ANONYMOUS");
+    }
+
+    @Bean
+    SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        return http
+                .authorizeExchange(exchange -> exchange.matchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                        .anyExchange().authenticated())
+                .oauth2Login(Customizer.withDefaults())
+                .build();
+    }
 
 }
+
 @RestController
 class FallbackController {
+//    private static final Logger LOGGER = LoggerFactory.getLogger(FallbackController.class);
 
-//	private static final Logger log = LoggerFactory.getLogger(FallbackController.class);
+    @GetMapping("/users-fallback")
+    Flux<Void> getBooksFallback() {
+//        LOGGER.info("redirecting to user-fallbackUrl {}", 5);
 
-	@GetMapping("/users-fallback")
-	Flux<Void> getBooksFallback() {
 //		log.info("Fallback for book service");
-		return Flux.empty();
-	}
+        return Flux.empty();
+    }
 
 }

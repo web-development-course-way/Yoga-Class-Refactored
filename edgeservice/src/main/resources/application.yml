@@ -1,15 +1,33 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
+        steps: 1s
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+  tracing:
+    sampling:
+      probability: 1.0
+
 server:
   port: 9001
 spring:
   application:
-    name: edgeservice
+    name: edge-service
+
+
   security:
     oauth2:
       client:
         registration:
           keycloak:
             client-id: springer
-            client-secret: wdGjvFAHmelEG1B6ODwqZB8oz28HCXK6
+            client-secret: 8U8IZTotTElfAeSQUZ52CH8p60eC9Qnk
             scope: openid
         provider:
           keycloak:
@@ -73,3 +91,8 @@ resilience4j:
     instances:
       userService-v1:
         timeoutDuration: 3s
+
+logging:
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+    include-application-name: false

@@ -5,6 +5,8 @@ import com.horus.yoga.dto.UserDTO;
 import com.horus.yoga.entity.User;
 import com.horus.yoga.service.UserService;
 import com.horus.yoga.util.APIResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v2/users")
 public class UserControllerV2 {
+//    private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerV2.class);
 
     private final UserService userService;
 
@@ -30,6 +33,7 @@ public class UserControllerV2 {
     @GetMapping
     @PreAuthorize("hasRole('instructor')")
     public APIResponse<List<UserDTO>> getAll() {
+//        LOGGER.info("getting all users {}", 0);
         List<UserDTO> users = userService.getAll();
         return APIResponse.ok(users);
     }
